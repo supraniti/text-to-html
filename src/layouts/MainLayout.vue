@@ -340,5 +340,6 @@ export default defineComponent({
   margin-bottom: 8px;
   border-radius: 8px;
   color: white;
+  width: fit-content;
 }
 </style>
