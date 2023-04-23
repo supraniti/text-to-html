@@ -242,7 +242,6 @@ export default defineComponent({
         })
 
         if (htmlString) {
-          debugger
           const doc = parser.parseFromString(sketchInstance.htmlString, 'text/html')
           if (newAssistantNode) {
             doc.documentElement.prepend(newAssistantNode)
