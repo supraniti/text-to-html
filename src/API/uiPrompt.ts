@@ -28,7 +28,17 @@ export const enhancePromptTailwind = (prompt:string, context?:sketchContext):str
 <request prompt="${prompt}">
   <context>${context?.htmlString ? context.htmlString : 'web design'}</context>
   <tasks>
-    <task id="generate_html" description="generate html matching the prompt. make sure all blocks have data-id attribute value set to their name and id, assistant field is required">
+    <task id="generate_layout" description="describe a layout of rows, columns and blocks matching the prompt">
+      <responseFields>
+        <div data-id="response_1" />
+      </responseFields>
+    </task>
+    <task id="generate_style_gudie" description="describe typography and colors matching the prompt">
+      <responseFields>
+        <div data-id="response_2" />
+      </responseFields>
+    </task>
+    <task id="generate_html" description="generate html matching the prompt and previous tasks. make sure all blocks have data-id attribute value set to their name and id, assistant field is required">
       <responseFields>
         <div data-id="assistant" />
         <div data-id="root" syntax="tailwind_css" data-id="blockname_id" icons="material-icons" images="via.placeholder.com" />
@@ -37,8 +47,7 @@ export const enhancePromptTailwind = (prompt:string, context?:sketchContext):str
   </tasks>
 </request>
 <response>
-  <tasks>
-    <task id="generate_html">`
+  <tasks>`
 
 export const translateResponseTailwind = (responseString:string):TranslatedResponse => {
   const parser = new DOMParser()
