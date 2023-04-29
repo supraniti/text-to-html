@@ -17,7 +17,8 @@ export const getApiResponse = (
   translateResponse:(response:string)=>TranslatedResponse,
   context?:Record<string, any>,
   temperature?:number):Promise<ApiResponse> =>
-  fetch('https://api.openai.com/v1/chat/completions', {
+  // fetch('https://api.openai.com/v1/chat/completions', {
+  fetch('https://api.openai.com/v1/completions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -28,10 +29,11 @@ export const getApiResponse = (
       temperature: temperature || defaultTemperature,
       max_tokens: maxTokens,
       stop,
-      messages: [{
-        role: 'user',
-        content: enhancePrompt(prompt, context)
-      }]
+      prompt: enhancePrompt(prompt, context)
+      // messages: [{
+      //   role: 'user',
+      //   content: enhancePrompt(prompt, context)
+      // }]
     })
   })
     .then((response) => response.json())
@@ -42,7 +44,8 @@ export const getApiResponse = (
       const {
         newAssistantNode,
         newRootNode
-      } = translateResponse(json.choices[0].message.content)
+      // } = translateResponse(json.choices[0].message.content)
+      } = translateResponse(json.choices[0].text)
       return {
         isError: false,
         usage: json.usage.total_tokens,

@@ -2,7 +2,6 @@ import { sketchContext, requestResponse } from '../utils/utils'
 import { TranslatedResponse } from 'src/API/apiRequest'
 
 export const enhancePromptTailwind = (prompt:string, context?:sketchContext):string => `
-example:
 <request context="web design" prompt="trick or treat save button">
   <tasks>
     <task id="create_button" description="create a button matching the prompt">
@@ -26,7 +25,6 @@ example:
     </task>
   </tasks>
 </response>
-Please provide a detailed <response> object in accordance to structure described in the request body:
 <request prompt="${prompt}">
   <context>${context?.htmlString ? context.htmlString : 'web design'}</context>
   <tasks>
@@ -37,7 +35,10 @@ Please provide a detailed <response> object in accordance to structure described
       </responseFields>
     </task>
   </tasks>
-</request>`
+</request>
+<response>
+  <tasks>
+    <task id="generate_html">`
 
 export const translateResponseTailwind = (responseString:string):TranslatedResponse => {
   const parser = new DOMParser()
@@ -69,7 +70,7 @@ example:
     <task id="tailwind_edit" description="edit the html in the context to fulfill the prompt request">
       <responseFields>
         <div data-id="assistant" />
-        <div data-id="root" syntax="tailwind_css" icons="material-icons" images="placeimg.com" />
+        <div data-id="root" syntax="tailwind_css" icons="material-icons" images="https://via.placeholder.com" />
       </responseFields>
     </task>
   </tasks>
